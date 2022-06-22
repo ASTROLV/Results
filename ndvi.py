@@ -6,6 +6,7 @@ from fastiecm import fastiecm
 
 park = cv2.imread('/home/pi/Desktop/015.png') # load image
 
+#Function to modify the contrast of the image
 def contrast_stretch(im):
     in_min = np.percentile(im, 5)
     in_max = np.percentile(im, 95)
@@ -19,7 +20,7 @@ def contrast_stretch(im):
 
     return out
 
-
+#Function to calculate the NDVI
 def calc_ndvi(image):
     b, g, r = cv2.split(image)
     bottom = (r.astype(float) + b.astype(float))
@@ -29,6 +30,7 @@ def calc_ndvi(image):
     return ndvi
 
 
+#Save the photos in the computer
 contrasted = contrast_stretch(park)
 cv2.imwrite('contrasted.png', contrasted)
 ndvi = calc_ndvi(contrasted)
